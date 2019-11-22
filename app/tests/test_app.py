@@ -1,6 +1,6 @@
 import unittest
 from flask_testing import TestCase
-from app import create_app
+from src.app import create_app
 import requests, json, base64
 from requests.auth import HTTPBasicAuth
 
