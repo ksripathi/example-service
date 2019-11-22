@@ -3,7 +3,7 @@ from flask import send_file, Blueprint, current_app
 import jwt
 import datetime
 from functools import wraps
-import json, requests, jsonpatch
+import json, requests
 
 api = Blueprint('APIs', __name__)
 
