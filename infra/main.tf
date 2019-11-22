@@ -1,17 +1,9 @@
 resource "google_container_cluster" "gcp_kubernetes" {
     name               = "${var.cluster_name}"
 
-    zone               = "us-central1-a"
+    location               = "us-central1-a"
 
     initial_node_count = "${var.gcp_cluster_count}"
-
-    additional_zones = [
-
-        "us-central1-b",
-
-        "us-central1-c",
-
-    ]
 
     master_auth {
 
