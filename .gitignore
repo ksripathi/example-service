@@ -1,5 +1,6 @@
 serviceaccount.json
 *py~
+*~
 *pyc
 #*#
 __pycache__
