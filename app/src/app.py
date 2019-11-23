@@ -1,5 +1,5 @@
 from flask import Flask
-from src.api import api
+from api import api
 import logging, os
 
 

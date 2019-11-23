@@ -51,3 +51,10 @@ def login():
         return jsonify({'token':token})
     current_app.logger.error('Unauthorized. Please enter Username and Password to login')
     return make_response('Un Authorized', 401, {'WWW-Authenticate':'Basic-realm="Login required!"'})
+@api.route('/liveness')
+def liveness():
+    return "liveness, ok"
+
+@api.route('/readiness')
+def readiness():
+    return "readiness, ok"
