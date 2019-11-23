@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -euo pipefail
-
 is_example_chart_exist=`helm ls | grep example-service`
 if [ ! -z "$is_example_chart_exist" ]
 then
@@ -10,9 +8,10 @@ else
     helm install . --name example-service
 fi
 
-community_charts="nginx concourse prometheus sonarqube"
-for chart in $community_charts
+community_charts="nginx-ingress concourse prometheus sonarqube"
+for chart in $community_charts;
 do
+  echo $chart;
   is_chart_exist=`helm ls | grep $chart`
   if [ ! -z "$is_chart_exist" ]
   then
@@ -20,6 +19,6 @@ do
   else
       helm install stable/$chart --name $chart
   fi    
-done
+done;
 
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -euo pipefail
+set -e
 charts="example-service nginx-ingress prometheus concourse sonarqube"
 for chart in $charts
 do
