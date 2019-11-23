@@ -1,3 +1,3 @@
 {{- define "service.name" -}}
-example-chart
+example-service
 {{- end -}}
