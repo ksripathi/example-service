@@ -3,9 +3,19 @@ import jwt
 import datetime
 from functools import wraps
 import json, requests
+from random import randint
 
 api = Blueprint('APIs', __name__)
 users = []
+id = 0
+
+def user_exist(email):
+    global users
+    user_exist = [ user for user in users if user["email"] == email ]
+    if user_exist:
+        return True
+    else:
+        return False
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -63,12 +73,20 @@ def login():
 @api.route('/users', methods=["POST", "GET"])
 @token_required
 def get_and_post_users():
+    global users
+    global id
     if request.method == "GET":
         return jsonify(users)
+    
     elif request.method == "POST":
-        user = request.get_json()
-        users.append(user)
-        return jsonify(users)
+        new_user = request.get_json()
+        if not user_exist(new_user["email"]):
+            id = id + 1
+            new_user["id"] = id
+            users.append(new_user)
+            return jsonify(new_user)
+        else:
+            return jsonify("Email %s already exist" % new_user["email"])
     else:
         abort(make_response(jsonify(message="Method not allowed"), 405))
            
@@ -84,15 +102,24 @@ def update_and_del_users(id):
             return "No user record found with id %s" % (id)
         
     elif request.method == "DELETE":
-        users = list(filter(lambda i: i['id'] != int(id), users))
-        return jsonify(users)
-    
+        new_user_list = list(filter(lambda i: i['id'] != int(id), users))
+        print(len(users), len(new_user_list))
+        if len(users)-1 == len(new_user_list) :
+            return jsonify("Successfully deleted entry with email %s" % id) 
+        
     elif request.method == "PUT":
         update_user = request.get_json()
-        print(update_user)
+        if "name" not in update_user or "email" not in update_user:
+            abort(make_response(jsonify(message="Missing fields"), 500))            
         for user in users:
             if user["id"] == int(id):
-                user["name"] = update_user["name"]
+                if "name" in user:
+                    user["name"] = update_user["name"]
+                if "email" in user:
+                    if not user_exist(update_user["email"]):
+                        user["email"] = update_user["email"]
+                    else:
+                        return jsonify("Email %s already exist" % update_user["email"])                        
                 return jsonify(user)
     else:
         abort(make_response(jsonify(message="Method not allowed"), 405))
