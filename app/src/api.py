@@ -16,6 +16,13 @@ def user_exist(email):
         return True
     else:
         return False
+def user_id_exist(id):
+    user = [ user for user in users if user["id"] == int(id) ]
+    if user:
+        return True
+    else:
+        return False
+    
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -86,28 +93,35 @@ def get_and_post_users():
             users.append(new_user)
             return jsonify(new_user)
         else:
-            return jsonify("Email %s already exist" % new_user["email"])
+            return jsonify("Email %s is already exist" % new_user["email"])
     else:
         abort(make_response(jsonify(message="Method not allowed"), 405))
            
 @api.route('/users/<id>', methods=["GET", "PUT", "DELETE"])
 @token_required
 def update_and_del_users(id):
+    
     global users
+    id = int(id)
     if request.method == "GET":
-        user = [ user for user in users if user["id"] == int(id) ]
-        if user:
+        if user_id_exist(id):
             return jsonify(user)
         else:
             return "No user record found with id %s" % (id)
         
     elif request.method == "DELETE":
+
+        if not user_id_exist(id):
+            return "No user record found with id %s" % (id)        
         new_user_list = list(filter(lambda i: i['id'] != int(id), users))
-        print(len(users), len(new_user_list))
         if len(users)-1 == len(new_user_list) :
-            return jsonify("Successfully deleted entry with email %s" % id) 
+            users = new_user_list
+            return jsonify("Successfully deleted entry with id %s" % id) 
         
     elif request.method == "PUT":
+        if not user_id_exist(id):
+            return "No user record found with id %s" % (id)
+        
         update_user = request.get_json()
         if "name" not in update_user or "email" not in update_user:
             abort(make_response(jsonify(message="Missing fields"), 500))            
@@ -119,13 +133,14 @@ def update_and_del_users(id):
                     if not user_exist(update_user["email"]):
                         user["email"] = update_user["email"]
                     else:
-                        return jsonify("Email %s already exist" % update_user["email"])                        
+                        return jsonify("Email %s is already exist" % update_user["email"])                        
                 return jsonify(user)
     else:
         abort(make_response(jsonify(message="Method not allowed"), 405))
+
 @api.route('/')
 def root():
-    return "Welcome to the page..!!"
+    return "Welcome to the page..!! please login at /login with anonymous username and password"
 
 @api.route('/liveness')
 def liveness():
