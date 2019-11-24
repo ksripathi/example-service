@@ -3,6 +3,6 @@ MAINTAINER Sripathi Kammari "kammari.sripathi@gmail.com"
 COPY src /src
 WORKDIR /src
 EXPOSE 5000
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 ENTRYPOINT ["python"]
 CMD ["app.py"]

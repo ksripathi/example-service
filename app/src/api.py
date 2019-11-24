@@ -3,8 +3,6 @@ import jwt
 import datetime
 from functools import wraps
 import json, requests
-from random import randint
-from flask_swagger import swagger
 
 api = Blueprint('APIs', __name__)
 users = []
@@ -98,14 +96,14 @@ def get_and_post_users():
     else:
         abort(make_response(jsonify(message="Method not allowed"), 405))
            
-@api.route('/users/<id>', methods=["GET", "PUT", "DELETE"])
+@api.route('/users/<int:id>', methods=["GET", "PUT", "DELETE"])
 @token_required
 def update_and_del_users(id):
     
     global users
-    id = int(id)
     if request.method == "GET":
         if user_id_exist(id):
+            user = [ user for user in users if user["id"] == int(id) ]
             return jsonify(user)
         else:
             return "No user record found with id %s" % (id)
@@ -141,11 +139,7 @@ def update_and_del_users(id):
 
 @api.route('/')
 def root():
-    swag = swagger(api)
-    swag['info']['version'] = "1.0"
-    swag['info']['title'] = "My API"
-    return jsonify(swag)    
-    #return "Welcome to the page..!! please login at /login with anonymous username and password"
+    return "Welcome to the page..!! please login at /login with anonymous username and password"
 
 @api.route('/liveness')
 def liveness():
