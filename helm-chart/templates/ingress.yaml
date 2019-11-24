@@ -7,11 +7,32 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-  - host: poc.spaceinje.com
+  - host: service.atlan.spaceinje.com
     http:
       paths:
       - path: /
         backend:	
           serviceName: example-service
           servicePort: 80
+  - host: sonarqube.atlan.spaceinje.com
+    http:
+      paths:
+      - path: /
+        backend:	
+          serviceName: sonarqube-sonarqube
+          servicePort: 9000
+  - host: concourse.atlan.spaceinje.com
+    http:
+      paths:
+      - path: /
+        backend:	
+          serviceName: concourse-web
+          servicePort: 8080
 
+  - host: prometheus.atlan.spaceinje.com
+    http:
+      paths:
+      - path: /
+        backend:	
+          serviceName: prometheus-server
+          servicePort: 80

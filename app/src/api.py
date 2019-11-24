@@ -4,6 +4,7 @@ import datetime
 from functools import wraps
 import json, requests
 from random import randint
+from flask_swagger import swagger
 
 api = Blueprint('APIs', __name__)
 users = []
@@ -140,7 +141,11 @@ def update_and_del_users(id):
 
 @api.route('/')
 def root():
-    return "Welcome to the page..!! please login at /login with anonymous username and password"
+    swag = swagger(api)
+    swag['info']['version'] = "1.0"
+    swag['info']['title'] = "My API"
+    return jsonify(swag)    
+    #return "Welcome to the page..!! please login at /login with anonymous username and password"
 
 @api.route('/liveness')
 def liveness():
