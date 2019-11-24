@@ -122,7 +122,7 @@ def update_and_del_users(id):
             return "No user record found with id %s" % (id)
         
         update_user = request.get_json()
-        if "name" not in update_user or "email" not in update_user:
+        if not update_user:
             abort(make_response(jsonify(message="Missing fields"), 500))            
         for user in users:
             if user["id"] == int(id):
