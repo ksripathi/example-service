@@ -28,6 +28,7 @@ jobs:
     plan: 
       - 
         get: example-service-git-repo
+        trigger: true	
       - 
         params: 
           build: example-service-git-repo/app
@@ -39,6 +40,7 @@ jobs:
     plan: 
       - 
         get: example-service-git-repo
+        trigger: true	
       - 
         params: 
           build: example-service-git-repo/tools-docker-image
@@ -52,6 +54,10 @@ jobs:
         get: example-service-git-repo
         passed: [publish-docker-image]
         trigger: true
+      - 
+        get: example-service-docker-image
+        passed: [publish-docker-image]
+        trigger: true	
       - 
         config: 
           image_resource: 
@@ -73,7 +79,13 @@ jobs:
                   kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller || true
                   helm init --service-account tiller || true
                   cd example-service-git-repo/helm-chart
-                  helm install . --generate-name
+                  #is_chart_exist=$(helm list | grep exampl-service)
+                  if ! helm list | grep example-service
+                  then
+                      helm install . --name example-service
+                  else
+                      helm upgrade example-service .
+                  fi
             path: sh
         task: dev-deploy-job
     public: true
