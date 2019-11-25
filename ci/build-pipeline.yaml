@@ -1,7 +1,7 @@
 --- 
 jobs: 
   - 
-    name: job
+    name: build-job
     plan: 
       - 
         get: sources
@@ -24,7 +24,7 @@ jobs:
                   pip3 install -r sources/app/src/requirements.txt
                   python3 sources/app/src/test_app.py
             path: sh
-        task: simple-task
+        task: execute_build_test
     public: true
 resources: 
   - 
