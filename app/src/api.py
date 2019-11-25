@@ -72,7 +72,7 @@ def login():
             if auth is None:
                 msg = "Unauthorized, Please enter Username and Password to login"
                 current_app.logger.error(msg)
-                abort(make_response(jsonify(message=msg), 401))
+                return jsonify(message=msg), 401
 
             if auth.username is '' or auth.password is '':
                 message = "Unauthorized, either username or password is missing/empty"

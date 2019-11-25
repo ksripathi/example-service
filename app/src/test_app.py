@@ -15,7 +15,7 @@ class TestLogin(TestCase):
 
     def runTest(self):  
         valid_credentials = base64.b64encode(b'testuser:testpassword').decode('utf-8')
-        response = self.client.get(self.url, headers={'Authorization': 'Basic ' + valid_credentials})
+        response = self.client.post(self.url, headers={'Authorization': 'Basic ' + valid_credentials})
         self.assertEqual(response.status_code, 200)
 
 class TestLoginWithoutAuth(TestCase):
@@ -28,7 +28,7 @@ class TestLoginWithoutAuth(TestCase):
         self.url = 'http://localhost:5000/login'
 
     def runTest(self):
-        response = self.client.get(self.url)
+        response = self.client.post(self.url)
         self.assertEqual(response.status_code, 401)
         
 suite = unittest.TestSuite()
