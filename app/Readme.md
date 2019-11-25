@@ -10,6 +10,35 @@
    Following are the serveral APIs
    
 ### Root
+#### API
+
+```
+http://localhost:5000/
+```
+
+#### Method
+
+```
+GET
+```
+
+#### Payload
+
+```
+None
+```
+#### Response Code
+
+```
+200
+```
+
+#### Response Data
+
+```
+Welcome to the page..!! please login at /login with anonymous username and password
+```
+
 ### Login
 ### Add Users
 ### Get User List
