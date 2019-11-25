@@ -1,0 +1,37 @@
+--- 
+jobs: 
+  - 
+    name: job
+    plan: 
+      - 
+        get: sources
+        trigger: true
+      - 
+        config: 
+          image_resource: 
+            source: 
+              repository: python
+              tag: 3.6
+            type: docker-image
+          inputs: 
+            - 
+              name: sources
+          platform: linux
+          run: 
+            args: 
+              - "-exc"
+              - |
+                  pip3 install -r sources/app/src/requirements.txt
+                  python3 sources/app/src/test_app.py
+            path: sh
+        task: simple-task
+    public: true
+resources: 
+  - 
+    name: sources
+    source: 
+      branch: develop
+      password: {{git_username}}
+      uri: "https://bitbucket.org/sripathi2610/example-service"
+      username: {{git_password}}
+    type: git

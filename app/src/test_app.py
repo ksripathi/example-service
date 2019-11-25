@@ -30,8 +30,6 @@ class TestLoginWithoutAuth(TestCase):
     def runTest(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 401)
-
-
         
 suite = unittest.TestSuite()
 

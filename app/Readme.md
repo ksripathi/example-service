@@ -7,11 +7,14 @@
    2. This service exposes several REST APIs to manage user directory data
 
 ## Setup and Run the Service in Development environment
+
    Following steps help you to run the service in local environment
+
    1. Clone the repository
    
       ```
       git clone https://bitbucket.org/sripathi2610/example-service
+      
       cd example-service/app/src
       ```
       
@@ -19,6 +22,7 @@
    
       ```
       sudo apt-get install python-virtualenv
+      
       virtualenv -p /usr/bin/python3 venv 
       ```
       
@@ -54,7 +58,7 @@
       ```
       docker run -p 5000:5000 ksripathi/example-service:latest
       ```
-      
+	
    2. Go to the browser and access *http://localhost:5000*
    
 ## REST APIs
