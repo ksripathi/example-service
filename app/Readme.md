@@ -7,42 +7,54 @@
    2. This service exposes several REST APIs to manage user directory data
 
 ## Setup and Run the Service in Development environment
-
-
-
+   Following steps help you to run the service in local environment
    1. Clone the repository
+   
       ```
       git clone https://bitbucket.org/sripathi2610/example-service
       cd example-service/app/src
       ```
+      
    2. Setup and Install Virtualenv
+   
       ```
       sudo apt-get install python-virtualenv
       virtualenv -p /usr/bin/python3 venv 
       ```
+      
    3. Activate virtual environment
+   
       ```
       source venv/bin/activate
       ```
+      
    4. Installa packages
+   
       ```
       pip3 install -r requirements.txt
       ```
+      
    5. Configure the variables
+   
       ```
       vim config/config.py
       ```
+      
    5. Run the application
+   
       ```
       python3 app.py
       ```
+      
    6. Go to the browser and access *http://localhost:5000*
 
 ## Run Service using Docker Imaage
    1. Run the command
+   
       ```
       docker run -p 5000:5000 ksripathi/example-service:latest
       ```
+      
    2. Go to the browser and access *http://localhost:5000*
    
 ## REST APIs
