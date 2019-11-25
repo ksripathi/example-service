@@ -4,7 +4,7 @@ jobs:
     name: build-job
     plan: 
       - 
-        get: sources
+        get: example-service-git-sources
         trigger: true
       - 
         config: 
@@ -15,23 +15,51 @@ jobs:
             type: docker-image
           inputs: 
             - 
-              name: sources
+              name: example-service-git-sources
           platform: linux
           run: 
             args: 
               - "-exc"
               - |
-                  pip3 install -r sources/app/src/requirements.txt
-                  python3 sources/app/src/test_app.py
+                  pip3 install -r example-service-git-sources/app/src/requirements.txt
+                  python3 example-service-git-sources/app/src/test_app.py
             path: sh
         task: execute_build_test
     public: true
+    on_failure:
+      put: slack-alert
+      params:
+        channel: '#sripathi'
+        username: 'concourse'
+        icon_emoji: ':concourse:'
+        silent: true
+        text: |
+              build job failure message
+    on_success:
+      put: slack-alert
+      params:
+        channel: '#sripathi'
+        username: 'concourse'
+        icon_emoji: ':concourse:'
+        silent: true
+        text: |
+            build job success message        
 resources: 
   - 
-    name: sources
+    name: example-service-git-sources
     source: 
       branch: develop
-      password: {{git_username}}
-      uri: "https://bitbucket.org/sripathi2610/example-service"
-      username: {{git_password}}
+      password: {{git_password}}
+      uri: https://bitbucket.org/sripathi2610/example-service.git
+      username: {{git_user}}
     type: git
+  - name: slack-alert
+    type: slack-notification
+    source:
+      url: {{slack_notification_url}}    
+resource_types:
+  - name: slack-notification
+    type: docker-image
+    source:
+      repository: cfcommunity/slack-notification-resource
+      tag: v1.3.0

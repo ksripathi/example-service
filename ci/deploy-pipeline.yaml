@@ -1,13 +1,33 @@
 ---
+resource_types:
+  - name: slack-notification
+    type: docker-image
+    source:
+      repository: cfcommunity/slack-notification-resource
+      tag: v1.3.0
 resources:
-- name: example-service-git-repo
+- name: slack-alert
+  type: slack-notification
+  source:
+    url: {{slack_notification_url}}
+- name: example-service-git-sources
   type: git
   source:
     uri: https://bitbucket.org/sripathi2610/example-service.git
-    branch: develop
+    branch: master
     username: {{git_user}}
     password: {{git_password}}
-
+    ignore_paths:
+      - tools-docker-image
+- name: example-service-tools-git-sources
+  type: git
+  source:
+    uri: https://bitbucket.org/sripathi2610/example-service.git
+    branch: master
+    username: {{git_user}}
+    password: {{git_password}}
+    paths:
+      - tools-docker-image      
 - name: example-service-docker-image
   type: docker-image
   source:
@@ -15,7 +35,7 @@ resources:
     username: {{docker_user}}
     password: {{docker_password}}
     repository: ksripathi/example-service
-- name: example-tools-image
+- name: example-service-tools-docker-image
   type: docker-image
   source:
     email: kammari.sripathi@gmail.com
@@ -27,37 +47,77 @@ jobs:
     name: publish-docker-image
     plan: 
       - 
-        get: example-service-git-repo
+        get: example-service-git-sources
         trigger: true	
       - 
         params: 
-          build: example-service-git-repo/app
+          build: example-service-git-sources/app
         put: example-service-docker-image
     public: true
     serial: true
+    on_failure:
+      put: slack-alert
+      params:
+        channel: '#sripathi'
+        username: 'concourse'
+        icon_emoji: ':concourse:'
+        silent: true
+        text: |
+              publish docker image failure message
+    on_success:
+      put: slack-alert
+      params:
+        channel: '#sripathi'
+        username: 'concourse'
+        icon_emoji: ':concourse:'
+        silent: true
+        text: |
+            publish docker image success message    
   - 
     name: publish-tools-docker-image
     plan: 
       - 
-        get: example-service-git-repo
+        get: example-service-tools-git-sources
         trigger: true	
       - 
         params: 
-          build: example-service-git-repo/tools-docker-image
-        put: example-tools-image
+          build: example-service-tools-git-sources/tools-docker-image
+        put: example-service-tools-docker-image
     public: true
-    serial: true    
+    serial: true
+    on_failure:
+      put: slack-alert
+      params:
+        channel: '#sripathi'
+        username: 'concourse'
+        icon_emoji: ':concourse:'
+        silent: true
+        text: |
+              publish tools image failure message
+    on_success:
+      put: slack-alert
+      params:
+        channel: '#sripathi'
+        username: 'concourse'
+        icon_emoji: ':concourse:'
+        silent: true
+        text: |
+            publish tools image success message        
   - 
-    name: dev-deploy-job
+    name: deploy-to-dev-env
     plan: 
-      - 
-        get: example-service-git-repo
-        passed: [publish-docker-image]
-        trigger: true
       - 
         get: example-service-docker-image
         passed: [publish-docker-image]
+        trigger: true
+      - 
+        get: example-service-git-sources
+        passed: [publish-docker-image]
         trigger: true	
+      - 
+        get: example-service-tools-docker-image
+        passed: [publish-tools-docker-image]
+        trigger: true
       - 
         config: 
           image_resource: 
@@ -66,7 +126,7 @@ jobs:
             type: docker-image
           inputs: 
             - 
-              name: example-service-git-repo
+              name: example-service-git-sources
           platform: linux
           run: 
             args: 
@@ -74,11 +134,11 @@ jobs:
               - |
                   echo {{service_account}} > service_account.json
                   gcloud auth activate-service-account --key-file=service_account.json
-                  gcloud container clusters get-credentials devcluster --region us-central1 --project dev-project-259009
+                  gcloud container clusters get-credentials {{cluster_name}} --region {{region}} --project {{project_id}}
                   kubectl -n kube-system create serviceaccount tiller || true		  
                   kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller || true
                   helm init --service-account tiller || true
-                  cd example-service-git-repo/helm-chart
+                  cd example-service-git-sources/helm-chart
                   #is_chart_exist=$(helm list | grep exampl-service)
                   if ! helm list | grep example-service
                   then
@@ -87,5 +147,23 @@ jobs:
                       helm upgrade example-service .
                   fi
             path: sh
-        task: dev-deploy-job
+        task: deploy-to-dev-env
     public: true
+    on_failure:
+      put: slack-alert
+      params:
+        channel: '#sripathi'
+        username: 'concourse'
+        icon_emoji: ':concourse:'
+        silent: true
+        text: |
+              dev deploy failure message
+    on_success:
+      put: slack-alert
+      params:
+        channel: '#sripathi'
+        username: 'concourse'
+        icon_emoji: ':concourse:'
+        silent: true
+        text: |
+            dev deploy success message        
