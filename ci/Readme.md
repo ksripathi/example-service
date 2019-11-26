@@ -37,7 +37,7 @@
    ```
 
    On successful run of above pipeline it should look like
-   https://drive.google.com/file/d/1lG-hFq-5iFiZObaWXxjI_OK6QJXriGe9/view
+   ![image](https://drive.google.com/uc?export=view&id=1lG-hFq-5iFiZObaWXxjI_OK6QJXriGe9)
    
 ## Setup the dev deploy pipeline
 
