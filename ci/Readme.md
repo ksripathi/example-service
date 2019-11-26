@@ -37,8 +37,7 @@
    ```
 
    On successful run of above pipeline it should look like
-
-   ![build-pipeline](https://drive.google.com/file/d/1lG-hFq-5iFiZObaWXxjI_OK6QJXriGe9/view?usp=sharing "title")
+   https://drive.google.com/file/d/1lG-hFq-5iFiZObaWXxjI_OK6QJXriGe9/view?usp=sharing
    
 ## Setup the dev deploy pipeline
 
