@@ -31,11 +31,11 @@
 ## Setup the build pipeline
    
    ```
-   
    fly -t example set-pipeline -p build-pipeline -c build-pipeline.yaml -v git_user="<name>" -v git_password="<password>" -l credentials.json
-   
+   ```
+
+   ```
    fly -t example unpause-pipeline -p build-pipeline
-   
    ```
 
    On successful run of above pipeline it should look like
@@ -44,11 +44,11 @@
 ## Setup the dev deploy pipeline
 
    ```
-   
    fly -t example set-pipeline -p deploy-pipeline -c deploy-pipeline.yaml -v git_user="<user>" -v git_password="<pwd>" -v docker_user="<user>" -v docker_password="<pwd>" -l credentials.json
+   ```
 
+   ```
    fly -t example unpause-pipeline -p deploy-pipeline
-   
    ```
 
    On successful run of above pipeline it should look like
