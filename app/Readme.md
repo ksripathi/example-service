@@ -14,7 +14,9 @@
    
       ```
       git clone https://bitbucket.org/sripathi2610/example-service
-      
+      ```
+
+      ```      
       cd example-service/app/src
       ```
       
@@ -22,7 +24,9 @@
    
       ```
       sudo apt-get install python-virtualenv
-      
+      ```
+
+      ```      
       virtualenv -p /usr/bin/python3 venv 
       ```
       
