@@ -17,20 +17,24 @@
    7. Prometheus
 ## Deployments
 * Note:- Following services will be available only upon request until then they will be not in running state
+
 1. example-service available on
 
       ```
       http://service.atlan.spaceinje.com
       ```
+
 2. sonarqube accessible on
 
       ```
       http://sonarqube.atlan.spaceinje.com
       ```
+
 3. concourse CI accessible on
       ```
       http://concourse.atlan.spaceinje.com
       ```
+
 4. prometheus accessible on
 
       ```
