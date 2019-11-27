@@ -80,6 +80,7 @@ Please [setup]((https://bitbucket.org/sripathi2610/example-service/src/master/ap
    ![image](https://drive.google.com/uc?export=view&id=1uoyWKxPZJ123vnuwLOUYgibZyv64yMTB)
 
 ### Conteneous Delivery till Dev deployment as follows
+
 1.  Developer pushes the code to *master* branch of the repository
 2.  A concourse pipeline/job is configured to be triggered when code changes made to *master* branch
 3.  Concourse pipeline/job does the following and sends the *slack* alerts  if any of below checks fails to run
