@@ -3,6 +3,15 @@ FROM alpine:3.10
 ARG VCS_REF
 ARG BUILD_DATE
 
+ENV TERRAFORM_VERSION 0.11.14
+
+RUN apk --update --no-cache add libc6-compat curl git openssh-client python py-pip python3 && pip install awscli
+
+RUN cd /usr/local/bin && \
+    curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
+    unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
+    rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+    
 # Metadata
 LABEL org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.name="helm-kubectl" \
