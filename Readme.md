@@ -66,11 +66,11 @@ Please [setup]((https://bitbucket.org/sripathi2610/example-service/src/master/ap
 2. A concourse pipeline/job is configured to be triggered automatically when changes made to *develop* branch
 3. Concourse pipeline/job does the following and sends the *slack* alerts if any of below checks fails to run
 
-        1. Compiles the code
+   1. Compiles the code
 	
-	2. Runs the untit test
+   2. Runs the untit test
 	
-	3. Runs the linting to ensure code conventions properly followed
+   3. Runs the linting to ensure code conventions properly followed
 	
 4. Generates the code coverage
 5. Pushes the code coverage, linting report and python sources to *Sonarqube* server
@@ -83,10 +83,15 @@ Please [setup]((https://bitbucket.org/sripathi2610/example-service/src/master/ap
 1.  Developer pushes the code to *master* branch of the repository
 2.  A concourse pipeline/job is configured to be triggered when code changes made to *master* branch
 3.  Concourse pipeline/job does the following and sends the *slack* alerts  if any of below checks fails to run
-        1.  Compiles the code
-	    2.  Runs the untit test
-    	3.  Runs the linting to ensure code conventions properly followed
-	    4.  Generates the code coverage
+
+    1.  Compiles the code
+    
+    2.  Runs the untit test
+    
+    3.  Runs the linting to ensure code conventions properly followed
+    
+    4.  Generates the code coverage
+    
 4.  Builds a Docker image
 5.  And pushes to the Docker Hub repository(docker.io/ksripathi/example-service)
 6.  Helm chart is processed and replaced with *latest* docker image version from registry
