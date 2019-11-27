@@ -2,7 +2,7 @@
 ## Description
 1. *eample-service* is a stateless micro service which implements REST APIs to manage the basic user directory information such as names and email ids
 2. It is built using Python Flask framework and provides APIs to perform CRUD (Create, Read, Update and Delete) Operations
-3. More information can be found [here](https://bitbucket.org/sripathi2610/example-service/src/master/)
+3. More information can be found [here](https://bitbucket.org/sripathi2610/example-service/src/master/app/)
 
 ## Technology Stack Used
 
@@ -62,24 +62,25 @@ Please [setup]((https://bitbucket.org/sripathi2610/example-service/src/master/ap
 ## Workflows
 ### Contineous Integration as follows
 
-1. Developer pushes code to develop branch of code repository
-2. A concourse pipeline/job is configured to be triggered automatically when changes made to *develop* branch
-3. Concourse pipeline/job does the following and sends the *slack* alerts if any of below checks fails to run
+1.  Developer pushes code to develop branch of code repository
+2.  A concourse pipeline/job is configured to be triggered automatically when changes made to *develop* branch
+3.  Concourse pipeline/job does the following and sends the *slack* alerts if any of below checks fails to run
 
-   1.  Compiles the code
+    1.  Compiles the code
+   
+    2.  Runs the untit test
 	
-   2.  Runs the untit test
+    3.  Runs the linting to ensure code conventions properly followed
 	
-   3.  Runs the linting to ensure code conventions properly followed
-	
-4. Generates the code coverage
-5. Pushes the code coverage, linting report and python sources to *Sonarqube* server
-4. Sonar analysis will takes place
-5. Gets the reports form SonarQube server
-6. If constraints failed *slack* notification will be sent to configured channel
-   ![image](https://drive.google.com/uc?export=view&id=1uoyWKxPZJ123vnuwLOUYgibZyv64yMTB)
+4.  Generates the code coverage
+5.  Pushes the code coverage, linting report and python sources to *Sonarqube* server
+4.  Sonar analysis will takes place
+5.  Gets the reports form SonarQube server
+6.  If constraints failed *slack* notification will be sent to configured channel
+    ![image](https://drive.google.com/uc?export=view&id=1uoyWKxPZJ123vnuwLOUYgibZyv64yMTB)
 
 ### Conteneous Delivery till Dev deployment as follows
+
 1.  Developer pushes the code to *master* branch of the repository
 2.  A concourse pipeline/job is configured to be triggered when code changes made to *master* branch
 3.  Concourse pipeline/job does the following and sends the *slack* alerts  if any of below checks fails to run
@@ -93,7 +94,7 @@ Please [setup]((https://bitbucket.org/sripathi2610/example-service/src/master/ap
     4.  Generates the code coverage
     
 4.  Builds a Docker image
-5.  And pushes to the Docker Hub repository(docker.io/ksripathi/example-service)
+5.  And pushes to the Docker Hub repository(https://hub.docker.com/repository/docker/ksripathi/example-service)
 6.  Helm chart is processed and replaced with *latest* docker image version from registry
 7.  Get the image tag from Dockerhub
 8.  Helm will install kubernetes resources objects into the environment
