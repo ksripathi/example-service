@@ -81,17 +81,17 @@
 
 ### Conteneous Delivery till Dev deployment as follows
 
-    1. Developer pushes the code to *master* branch of the repository
-    2. A concourse pipeline/job is configured to be triggered when code changes made to *master* branch
-    3. Concourse pipeline/job does the following and sends the *slack* alerts if any of below checks fails to run
-        1. Compiles the code
-	2. Runs the untit test
-	3. Runs the linting to ensure code conventions properly followed
-	4. Generates the code coverage
-    4. Builds a Docker image
-    5. And pushes to the Docker Hub repository (docker.io/ksripathi/example-service)
-    6&7. Helm chart is processed and replaced with *latest* docker image version from registry
-    8. Helm will install kubernetes resources objects into the environment
+    1.  Developer pushes the code to *master* branch of the repository
+    2.  A concourse pipeline/job is configured to be triggered when code changes made to *master* branch
+    3.  Concourse pipeline/job does the following and sends the *slack* alerts if any of below checks fails to run
+        1.  Compiles the code
+	2.  Runs the untit test
+	3.  Runs the linting to ensure code conventions properly followed
+	4.  Generates the code coverage
+    4.  Builds a Docker image
+    5.  And pushes to the Docker Hub repository (docker.io/ksripathi/example-service)
+    6&7.  Helm chart is processed and replaced with *latest* docker image version from registry
+    8.  Helm will install kubernetes resources objects into the environment
    ![image](https://drive.google.com/uc?export=view&id=1G3nnOxAMSXKkptQ2N8HE1SPwrd74x2vh)
 
 ## Use Cases and Edge Conditions
