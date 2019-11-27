@@ -94,7 +94,7 @@ Please [setup]((https://bitbucket.org/sripathi2610/example-service/src/master/ap
     4.  Generates the code coverage
     
 4.  Builds a Docker image
-5.  And pushes to the Docker Hub repository(docker.io/ksripathi/example-service)
+5.  And pushes to the Docker Hub repository(https://bitbucket.org/sripathi2610/example-service/src/master/)
 6.  Helm chart is processed and replaced with *latest* docker image version from registry
 7.  Get the image tag from Dockerhub
 8.  Helm will install kubernetes resources objects into the environment
