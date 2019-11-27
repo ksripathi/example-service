@@ -2,7 +2,7 @@
 ## Description
 1. *eample-service* is a stateless micro service which implements REST APIs to manage the basic user directory information such as names and email ids
 2. It is built using Python Flask framework and provides APIs to perform CRUD (Create, Read, Update and Delete) Operations
-3. More information can be found [here](https://bitbucket.org/sripathi2610/example-service/src/master/)
+3. More information can be found [here](https://bitbucket.org/sripathi2610/example-service/src/master/app/)
 
 ## Technology Stack Used
 
