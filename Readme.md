@@ -62,9 +62,9 @@ Please [setup]((https://bitbucket.org/sripathi2610/example-service/src/master/ap
 ## Workflows
 ### Contineous Integration as follows
 
-1. Developer pushes code to develop branch of code repository
-2. A concourse pipeline/job is configured to be triggered automatically when changes made to *develop* branch
-3. Concourse pipeline/job does the following and sends the *slack* alerts if any of below checks fails to run
+1.  Developer pushes code to develop branch of code repository
+2.  A concourse pipeline/job is configured to be triggered automatically when changes made to *develop* branch
+3.  Concourse pipeline/job does the following and sends the *slack* alerts if any of below checks fails to run
 
    1.  Compiles the code
 	
@@ -72,12 +72,12 @@ Please [setup]((https://bitbucket.org/sripathi2610/example-service/src/master/ap
 	
    3.  Runs the linting to ensure code conventions properly followed
 	
-4. Generates the code coverage
-5. Pushes the code coverage, linting report and python sources to *Sonarqube* server
-4. Sonar analysis will takes place
-5. Gets the reports form SonarQube server
-6. If constraints failed *slack* notification will be sent to configured channel
-   ![image](https://drive.google.com/uc?export=view&id=1uoyWKxPZJ123vnuwLOUYgibZyv64yMTB)
+4.  Generates the code coverage
+5.  Pushes the code coverage, linting report and python sources to *Sonarqube* server
+4.  Sonar analysis will takes place
+5.  Gets the reports form SonarQube server
+6.  If constraints failed *slack* notification will be sent to configured channel
+    ![image](https://drive.google.com/uc?export=view&id=1uoyWKxPZJ123vnuwLOUYgibZyv64yMTB)
 
 ### Conteneous Delivery till Dev deployment as follows
 
