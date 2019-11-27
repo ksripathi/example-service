@@ -135,17 +135,8 @@ jobs:
                   echo {{service_account}} > service_account.json
                   gcloud auth activate-service-account --key-file=service_account.json
                   gcloud container clusters get-credentials {{cluster_name}} --region {{region}} --project {{project_id}}
-                  kubectl -n kube-system create serviceaccount tiller || true		  
-                  kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller || true
-                  helm init --service-account tiller || true
                   cd example-service-git-sources/helm-chart
-                  #is_chart_exist=$(helm list | grep exampl-service)
-                  if ! helm list | grep example-service
-                  then
-                      helm install . --name example-service
-                  else
-                      helm upgrade example-service .
-                  fi
+                  sh install.sh
             path: sh
         task: deploy-to-dev-env
     public: true

@@ -17,11 +17,23 @@
       vim provider.tf
       ```
 
-## Run the script
-   Below command will provision the K8 script
+## Run the script to provision the infra
+   Below command will provision the following
+
+   1. nginx-ingress helm chart
+
+   2. concourse helm chart
+
+   3. sonarqube helm chart
+
+   4. prometheus helm chart   
 
    ```
-   sh install.sh
+   sh install-infra.sh
    ```
-## Conclustion
-   Above script will provision the K8 cluster on GCP cloud and output the required information
+
+## Run the script to de provision the infra
+
+   ```
+   sh destroy-infra.sh
+   ```

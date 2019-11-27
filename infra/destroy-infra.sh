@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/sh
+
+set -e
 
 terraform_version=v0.11.14
 terraform_exist=```terraform --version | grep $terraform_version```
@@ -13,5 +15,10 @@ else
     echo "terraform v0.11.14 already exist"
 fi
 
-./terraform apply --auto-approve
+terraform destroy --auto-approve
 
+charts="nginx-ingress prometheus concourse sonarqube"
+for chart in $charts
+do
+  helm delete --purge $chart
+done

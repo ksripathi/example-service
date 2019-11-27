@@ -46,7 +46,7 @@
 Please [setup]((https://bitbucket.org/sripathi2610/example-service/src/master/app/)) the example-service on local machine and follow the [API DOCUMENTATION](https://bitbucket.org/sripathi2610/example-service/src/master/app/)
 ### To setup example-service on Cloud (GCP)
  1. [Terraform scripts](https://bitbucket.org/sripathi2610/example-service/src/master/infra/) helps you to provision the K8 cluster on GCP
- 2. [Installation scripts at ](https://bitbucket.org/sripathi2610/example-service/src/master/helm-chart/install-helm.sh) will install/upgrade below required helm charts
+ 2. [Installation scripts at ](https://bitbucket.org/sripathi2610/example-service/src/master/helm-chart/install.sh) will install/upgrade below required helm charts
  
     1. example-service
     
