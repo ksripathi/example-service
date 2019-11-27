@@ -66,11 +66,11 @@ Please [setup]((https://bitbucket.org/sripathi2610/example-service/src/master/ap
 2. A concourse pipeline/job is configured to be triggered automatically when changes made to *develop* branch
 3. Concourse pipeline/job does the following and sends the *slack* alerts if any of below checks fails to run
 
-   1. Compiles the code
+   1.  Compiles the code
 	
-   2. Runs the untit test
+   2.  Runs the untit test
 	
-   3. Runs the linting to ensure code conventions properly followed
+   3.  Runs the linting to ensure code conventions properly followed
 	
 4. Generates the code coverage
 5. Pushes the code coverage, linting report and python sources to *Sonarqube* server
