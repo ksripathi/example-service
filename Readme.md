@@ -47,21 +47,31 @@ Please [setup]((https://bitbucket.org/sripathi2610/example-service/src/master/ap
 ### To setup example-service on Cloud (GCP)
  1. [Terraform scripts](https://bitbucket.org/sripathi2610/example-service/src/master/infra/) helps you to provision the K8 cluster on GCP
  2. [Installation scripts at ](https://bitbucket.org/sripathi2610/example-service/src/master/helm-chart/install-helm.sh) will install/upgrade below required helm charts
+ 
     1. example-service
+    
     2. SonarQube server
-    2. Concourse CI server
-    3. Prometheus server
-    4. Nginx-ingress
-2. [Pipeline](https://bitbucket.org/sripathi2610/example-service/src/master/ci/) definations are available to setup the CI and CD workflow
+    
+    3. Concourse CI server
+    
+    4. Prometheus server
+    
+    5. Nginx-ingress
+    
+3. [Pipeline](https://bitbucket.org/sripathi2610/example-service/src/master/ci/) definations are available to setup the CI and CD workflow
 ## Workflows
 ### Contineous Integration as follows
 
 1. Developer pushes code to develop branch of code repository
 2. A concourse pipeline/job is configured to be triggered automatically when changes made to *develop* branch
 3. Concourse pipeline/job does the following and sends the *slack* alerts if any of below checks fails to run
+
         1. Compiles the code
-	    2. Runs the untit test
-	    3. Runs the linting to ensure code conventions properly followed
+	
+	2. Runs the untit test
+	
+	3. Runs the linting to ensure code conventions properly followed
+	
 4. Generates the code coverage
 5. Pushes the code coverage, linting report and python sources to *Sonarqube* server
 4. Sonar analysis will takes place
