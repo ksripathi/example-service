@@ -64,6 +64,10 @@
    3. To setup Helm chart deployments - [link](https://bitbucket.org/sripathi2610/example-service/src/master/helm-chart/)
 
 ## Workflows
+
+   1. Conteneous Delivery till Dev deployment as follows
+   ![image](https://drive.google.com/uc?export=view&id=1G3nnOxAMSXKkptQ2N8HE1SPwrd74x2vh)
+   
    
 ## Use Cases and Edge Conditions
    More information can be found [here](https://bitbucket.org/sripathi2610/example-service/src/master/)
@@ -76,7 +80,7 @@
 
 ## Unresolved issues
 
-   1. SonarQube integration with *example-service* sources
+   1. As part of CI workflow SonarQube integration is not done with *example-service* sources
 
    2. HTTPS certificates not yet installed
 
