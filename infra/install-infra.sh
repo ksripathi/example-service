@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -e
 terraform_version=v0.11.14
 terraform_exist=```terraform --version | grep $terraform_version```
 if [ -z $terrafrom_exist ]
@@ -15,6 +14,9 @@ else
 fi
 
 ./terraform apply --auto-approve
+
+# TODO: this has to be variablized
+gcloud beta container clusters get-credentials devcluster --region us-central1 --project dev-project-259009
 
 fly_version=5.6.0
 is_fly_exist=```fly --version | grep $fly_version```
