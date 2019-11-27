@@ -6,6 +6,23 @@
    1. example-service is a stateless Micro Service built using Python - Flask framework
    2. This service exposes several REST APIs to manage user directory data
 
+## Use Cases and Edge Conditions
+### Use Cases
+
+   1. Ability to add users into the system
+
+   2. Ability to edit the existing user in the system
+
+   3. Ability to list users from the system
+
+   4. Ability to delete the users from the system
+### Edge Cases
+    1. Since *example-service* is a stateless micro service only limited users can be added to the system
+    
+    2. There are not validation done before user information getting added to the system
+    
+    3. Micro service will be available on *http* protocal only
+   
 ## Setup and Run the Service in Development environment
 
    Following steps help you to run the service in local environment
