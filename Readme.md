@@ -97,13 +97,13 @@
     
     3. Concourse pipeline/job does the following and sends the *slack* alerts if any of below checks fails to run
 
-        1. Compiles the code
+        * 1\. Compiles the code
 
-	2. Runs the untit test
+	* 2\. Runs the untit test
 
-	3. Runs the linting to ensure code conventions properly followed
+	* 3\. Runs the linting to ensure code conventions properly followed
 
-	4. Generates the code coverage
+	* 4\. Generates the code coverage
     
 
     4. Builds a Docker image
