@@ -42,7 +42,7 @@ then
     kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller || true
     helm init --service-account tiller || true
 fi
-
+sleep 10
 helm upgrade nginx-ingress stable/nginx-ingress --install
 helm upgrade prometheus stable/prometheus --install
 helm upgrade concourse stable/concourse --install

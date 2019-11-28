@@ -101,10 +101,11 @@ Please [setup]((https://bitbucket.org/sripathi2610/example-service/src/master/ap
 
 ## Performance and Scaling
 
+   * HPA :
+     If CPU utilization is above *80%* pods will autoscale to max 10
+
 ## Unresolved issues
 
    1. As part of CI workflow SonarQube integration is not done with *example-service* sources
 
    2. HTTPS certificates not yet installed
-
-   3. Autoscalling is not yet implemented
