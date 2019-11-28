@@ -10,12 +10,11 @@ then
     fi
     unzip terraform_0.11.14_linux_amd64.zip
     chmod +x ./terraform
-    alias terraform=./terraform
+    alias terraform='./terraform'
 else
     echo "terraform $terraform_version already exist"
 fi
 terraform --version
-exit 0
 terraform apply --auto-approve
 
 # TODO: this has to be variablized
