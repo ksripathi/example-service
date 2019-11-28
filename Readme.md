@@ -48,18 +48,7 @@
 ### To use example-service on localhost
 Please [setup]((https://bitbucket.org/sripathi2610/example-service/src/master/app/)) the example-service on local machine and follow the [API DOCUMENTATION](https://bitbucket.org/sripathi2610/example-service/src/master/app/)
 ### To setup example-service on Cloud (GCP)
- 1. [Terraform scripts](https://bitbucket.org/sripathi2610/example-service/src/master/infra/) helps you to provision the K8 cluster on GCP
- 2. [Installation scripts at ](https://bitbucket.org/sripathi2610/example-service/src/master/helm-chart/install.sh) will install/upgrade below required helm charts
- 
-    1. example-service
-    
-    2. SonarQube server
-    
-    3. Concourse CI server
-    
-    4. Prometheus server
-    
-    5. Nginx-ingress
+ 1. [Terraform and other scripts](https://bitbucket.org/sripathi2610/example-service/src/master/infra/) helps you to provision the bare infrastructure to run *example-service*
     
 3. [Pipeline](https://bitbucket.org/sripathi2610/example-service/src/master/ci/) definations are available to setup the CI and CD workflow
 ## Workflows
