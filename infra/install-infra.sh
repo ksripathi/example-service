@@ -41,8 +41,7 @@ then
     helm init --service-account tiller || true
 fi
 
-charts="nginx-ingress prometheus concourse sonarqube"
-for chart in $charts
-do
-  helm upgrade $chart stable/$chart --install
-done
+helm upgrade nginx-ingress stable/nginx-ingress --install
+helm upgrade prometheus stable/prometheus --install
+helm upgrade concourse stable/concourse --install
+helm upgrade sonarqube stable/sonarqube --install

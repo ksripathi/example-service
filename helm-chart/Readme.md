@@ -17,7 +17,17 @@
 
    above script will install the following on kubernetes cluster
 
-   1. example-service helm chart
+   1.  example-service helm chart
+
+   2.  Ingress object rules for
+
+       1.  sonarqube.atlan.spaceinje.com
+
+       2.  concourse.atlan.spaceinje.com
+
+       3.  prometheus.atlan.spaceinje.com
+
+       4.  service.atlan.spaceinje.com
 
 ## Destrooy the helm chart
    Run the script
