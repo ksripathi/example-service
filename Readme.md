@@ -42,6 +42,9 @@
       ```
 
 ## Installation / Usage Instructions
+### Hardware Requirements
+
+1.  4 Cpus and at least 8 GB RAM
 ### To use example-service on localhost
 Please [setup]((https://bitbucket.org/sripathi2610/example-service/src/master/app/)) the example-service on local machine and follow the [API DOCUMENTATION](https://bitbucket.org/sripathi2610/example-service/src/master/app/)
 ### To setup example-service on Cloud (GCP)
