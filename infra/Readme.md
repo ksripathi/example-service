@@ -32,6 +32,13 @@
    sh install-infra.sh
    ```
 
+   5. Above script creates =LoadBalancer= service with the Public IP
+
+      ```
+      kubectl get svc
+      ```
+
+   6. It has to be registered with domain type A record that points to ```*.atlan.spaceinje.com```. in my case its registered with ```godadday.com```
 ## Run the script to de provision the infra
 
    ```

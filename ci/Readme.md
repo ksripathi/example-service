@@ -19,7 +19,7 @@
    *Note:-* use default user/password as test/test
 
    ```
-   fly -t example login -c http://127.0.0.1:8080
+   fly -t example login -c http://concourse.atlan.spaceinje.com
    ```
 ## Setup the credentials
    Configure the required variables at
@@ -40,7 +40,13 @@
 
    On successful run of above pipeline it should look like
    ![image](https://drive.google.com/uc?export=view&id=1lG-hFq-5iFiZObaWXxjI_OK6QJXriGe9)
+
+## Destroy the build pipeline
    
+   ```
+   fly -t example destroy-pipeline build-pipeline
+   ```
+
 ## Setup the dev deploy pipeline
 
    ```
@@ -53,5 +59,16 @@
 
    On successful run of above pipeline it should look like
    ![image](https://drive.google.com/uc?export=view&id=12cLNz0aFt8wnCOlPGbySfQoIQ2Y2BGxB)
-## Conclusion
-   This page configures all pipelines and required tooling
+
+## Destroy the dev deploy pipeline
+   
+   ```
+   fly -t example destroy-pipeline deploy-pipeline
+   ```
+
+   On succesfull dev deployment *slack* notification will be sent to configured channel and service will be accessible from
+
+   ```
+   http://service.atlan.spaceinje.com
+   ```
+   Use [API_DOCUMENTATION](https://bitbucket.org/sripathi2610/example-service/src/master/app) to play with *example-service*
