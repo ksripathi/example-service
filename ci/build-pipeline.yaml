@@ -55,7 +55,7 @@ jobs:
               - "-exc"
               - |
                   cd example-service-git-sources
-		  sonar-scanner
+                  sonar-scanner
             path: sh
         task: run_sonar_scanning_steps
     public: true
@@ -87,11 +87,11 @@ resources:
 - name: example-service-git-sources
   source:
     branch: develop
-    password: sudswathi1993&
+    password: {{git_password}}
     uri: https://bitbucket.org/sripathi2610/example-service.git
-    username: sripathi2610
+    username: {{git_user}}
   type: git
 - name: slack-alert
   source:
-    url: https://hooks.slack.com/services/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
+    url: {{slack_notification_url}}
   type: slack-notification
