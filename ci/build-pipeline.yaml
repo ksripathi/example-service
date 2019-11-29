@@ -16,15 +16,48 @@ jobs:
           inputs: 
             - 
               name: example-service-git-sources
+          outputs: 
+            - 
+              name: pylint.txt
+            - 
+              name: coverage.xml	      
           platform: linux
           run: 
             args: 
               - "-exc"
               - |
-                  pip3 install -r example-service-git-sources/app/src/requirements.txt
+                  echo "Running pylint"
+                  pip3 install -r example-service-git-sources/app/src/requirements.txt		  
+                  pylint example-service-git-sources/app/src/*.py > pylint.txt || true
+                  coverage run example-service-git-sources/app/src/*.py || true
+                  coverage xml example-service-git-sources/app/src/*.py || true
+                  coverage report -m example-service-git-sources/app/src/*.py || true		  
                   python3 example-service-git-sources/app/src/test_app.py
             path: sh
         task: execute_build_test
+      - 
+        config: 
+          image_resource: 
+            source: 
+              repository: ksripathi/sonar-scanner
+              tag: latest
+            type: docker-image
+          inputs: 
+            - 
+              name: pylint.txt
+            - 
+              name: example-service-git-sources	      
+            - 
+              name: coverage.xml	      
+          platform: linux
+          run: 
+            args: 
+              - "-exc"
+              - |
+                  cd example-service-git-sources
+                  sonar-scanner
+            path: sh
+        task: run_sonar_scanning_steps
     public: true
     on_failure:
       put: slack-alert
@@ -43,23 +76,22 @@ jobs:
         icon_emoji: ':concourse:'
         silent: true
         text: |
-            build job success message        
-resources: 
-  - 
-    name: example-service-git-sources
-    source: 
-      branch: develop
-      password: {{git_password}}
-      uri: https://bitbucket.org/sripathi2610/example-service.git
-      username: {{git_user}}
-    type: git
-  - name: slack-alert
-    type: slack-notification
-    source:
-      url: {{slack_notification_url}}    
+            build job success message
 resource_types:
-  - name: slack-notification
-    type: docker-image
-    source:
-      repository: cfcommunity/slack-notification-resource
-      tag: v1.3.0
+- name: slack-notification
+  source:
+    repository: cfcommunity/slack-notification-resource
+    tag: v1.3.0
+  type: docker-image	    
+resources:
+- name: example-service-git-sources
+  source:
+    branch: develop
+    password: {{git_password}}
+    uri: https://bitbucket.org/sripathi2610/example-service.git
+    username: {{git_user}}
+  type: git
+- name: slack-alert
+  source:
+    url: {{slack_notification_url}}
+  type: slack-notification
